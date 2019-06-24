@@ -53,10 +53,10 @@ export default class Login extends React.Component {
     email: "",
     password: ""
   };
-  Login = () => {
+  Login = async () => {
     const { email, password } = this.state;
     if (email.length > 0 && password.length > 0) {
-      handleLogin({ email, password });
+      await handleLogin({ email, password });
       this.LoginHandler();
     }
   };
