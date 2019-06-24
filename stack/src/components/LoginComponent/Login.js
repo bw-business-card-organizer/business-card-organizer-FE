@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { handleLogin, isLoggedIn } from "./services";
+import { handleLogin, isLoggedIn } from "../withAuth/services";
 import styled from "styled-components";
 
 const LoginForm = styled.div`

@@ -1,3 +1,4 @@
+const axios = require("axios");
 export const isBrowser = () => typeof window !== "undefined";
 
 export const getUser = () =>
@@ -9,6 +10,9 @@ const setUser = user => localStorage.setItem("User", JSON.stringify(user));
 
 export const handleLogin = async ({ email, password }) => {
   setUser({ email });
+  return true;
+};
+export const handleRegister = async ({ email, password }) => {
   return true;
 };
 
