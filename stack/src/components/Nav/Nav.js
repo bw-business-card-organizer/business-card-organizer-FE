@@ -22,6 +22,8 @@ export default class Nav extends React.Component {
           <Header>STACK</Header>
         </NavDiv>
       );
+    } else {
+      return <NavDiv />;
     }
   }
 }
