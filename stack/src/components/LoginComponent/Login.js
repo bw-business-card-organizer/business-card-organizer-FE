@@ -11,13 +11,27 @@ const LoginForm = styled.div`
   align-items: center;
   width: 350px;
   height: 500px;
+  box-shadow: 4px 6px 7px 2px rgba(0, 0, 0, 0.75);
 `;
-
+const HeaderBack = styled.div`
+  width:100%;
+  height 50px;
+  background-color:#8C8886;
+  display:flex;
+  justify-content:center;
+`;
+const Header = styled.h1`
+  margin: 0px;
+  padding: 0px;
+  color: white;
+`;
 const TextInput = styled.input`
   margin: 25px;
   width: 75%;
   height: 25px;
   border: none;
+  background-color: #3c5d74;
+  color: white;
   border-bottom: 2px solid black;
   &:focus {
     outline: none;
@@ -29,6 +43,8 @@ const Button = styled.button`
   height: 35px;
   border-radius: 5px;
   border: none;
+  background-color: #b26c43;
+  color: white;
 `;
 
 export default class Login extends React.Component {
@@ -66,7 +82,9 @@ export default class Login extends React.Component {
     }
     return (
       <LoginForm>
-        <h1>Login Here</h1>
+        <HeaderBack>
+          <Header>Login</Header>
+        </HeaderBack>
         <TextInput
           type="text"
           name="email"
