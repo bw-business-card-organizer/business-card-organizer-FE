@@ -9,11 +9,36 @@ export const getUser = () =>
 const setUser = user => localStorage.setItem("User", JSON.stringify(user));
 
 export const handleLogin = async ({ email, password }) => {
-  setUser({ email });
-  return true;
+  await axios
+    .post("https://bw-business-card-org-be-raine.herokuapp.com/api/login", {
+      username: email,
+      password: password
+    })
+    .then(res => {
+      let email = res.data.message;
+      setUser({ email });
+      return true;
+    })
+    .catch(res => {
+      console.log(res);
+      alert(res.message);
+      return false;
+    });
+  return false;
 };
 export const handleRegister = async ({ email, password }) => {
-  return true;
+  await axios
+    .post("https://bw-business-card-org-be-raine.herokuapp.com/api/register", {
+      username: email,
+      password: password
+    })
+    .then(res => {
+      return true;
+    })
+    .catch(res => {
+      alert(res.message);
+      return false;
+    });
 };
 
 export const isLoggedIn = () => {
