@@ -11,12 +11,12 @@ const setUser = user => localStorage.setItem("User", JSON.stringify(user));
 export const handleLogin = async ({ email, password }) => {
   await axios
     .post("https://bw-business-card-org-be-raine.herokuapp.com/api/login", {
-      username: email,
+      email: email,
       password: password
     })
     .then(res => {
-      let email = res.data.message;
-      setUser({ email });
+      let token = res.data.token;
+      setUser({ token });
       return true;
     })
     .catch(res => {
@@ -26,12 +26,52 @@ export const handleLogin = async ({ email, password }) => {
     });
   return false;
 };
-export const handleRegister = async ({ email, password }) => {
+export const handleRegister = async ({ email, password, fName, lName }) => {
   await axios
     .post("https://bw-business-card-org-be-raine.herokuapp.com/api/register", {
-      username: email,
-      password: password
+      email: email,
+      password: password,
+      firstName: fName,
+      lastName: lName,
+      subscription: 0
     })
+    .then(res => {
+      return true;
+    })
+    .catch(res => {
+      alert(res.message);
+      return false;
+    });
+};
+export const handleAddCard = async ({
+  businessName,
+  address,
+  phone,
+  notes
+}) => {
+  console.log(businessName, address, phone, notes);
+  let user = getUser();
+  await axios
+    .post(
+      "https://bw-business-card-org-be-raine.herokuapp.com/api/cards",
+
+      {
+        businessName: businessName,
+        address: address,
+        phone: phone,
+        logoPic: null,
+        additionalPic: null,
+        phone2: null,
+        blurb: null,
+        hours: null,
+        email: null,
+        website: null,
+        notes: notes
+      },
+      {
+        headers: { Authorization: `${user.token}` }
+      }
+    )
     .then(res => {
       return true;
     })
@@ -43,7 +83,7 @@ export const handleRegister = async ({ email, password }) => {
 
 export const isLoggedIn = () => {
   const user = getUser();
-  if (user.email) {
+  if (user.token) {
     return true;
   }
   return false;
@@ -51,5 +91,4 @@ export const isLoggedIn = () => {
 
 export const logout = callback => {
   setUser({});
-  callback();
 };

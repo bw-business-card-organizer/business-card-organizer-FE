@@ -6,6 +6,7 @@ import Home from "./components/pages/home";
 import Login from "./components/LoginComponent/Login";
 import Register from "./components/LoginComponent/Register";
 import Nav from "./components/Nav/Nav";
+import Add from "./components/pages/Add";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
       <Route exact path="/register" component={Register} />
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute exact path="/home" component={Home} />
+      <PrivateRoute exact path="/add" component={Add} />
     </Router>
   );
 }
