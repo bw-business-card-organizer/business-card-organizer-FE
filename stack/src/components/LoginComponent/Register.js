@@ -5,14 +5,15 @@ import styled from "styled-components";
 
 const LoginForm = styled.div`
   margin: auto;
-  margin-top: 25px;
+  margin-top: 100px;
+  background-color: white;
   padding-bottom: 25px;
   display: flex;
   flex-direction: column;
   align-content: space-around;
   align-items: center;
   width: 350px;
-  height: 500px;
+  height: auto;
   box-shadow: 4px 6px 7px 2px rgba(0, 0, 0, 0.75);
 `;
 const HeaderBack = styled.div`
@@ -32,19 +33,15 @@ const TextInput = styled.input`
   width: 75%;
   height: 25px;
   border: none;
-  background-color: #3c5d74;
-  color: white;
+  color: black;
   border-bottom: 2px solid black;
   &:focus {
     outline: none;
-    background-color: #3c5d74;
-  }
-  &:internal-autofill-selected {
-    background-color: #3c5d74;
   }
 `;
 
 const Button = styled.button`
+  margin: 25px;
   width: 200px;
   height: 35px;
   border-radius: 5px;
