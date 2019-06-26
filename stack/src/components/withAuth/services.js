@@ -80,7 +80,25 @@ export const handleAddCard = async ({
       return false;
     });
 };
-
+export const handleDeleteCard = async id => {
+  let user = getUser();
+  console.log(user.token);
+  console.log(id);
+  await axios
+    .delete(
+      `https://bw-business-card-org-be-raine.herokuapp.com/api/cards/${id}`,
+      {
+        headers: { Authorization: `${user.token}` }
+      }
+    )
+    .then(res => {
+      return true;
+    })
+    .catch(res => {
+      alert(res.message);
+      return false;
+    });
+};
 export const isLoggedIn = () => {
   const user = getUser();
   if (user.token) {
