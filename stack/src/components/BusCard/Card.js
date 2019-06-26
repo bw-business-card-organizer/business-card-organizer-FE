@@ -1,6 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { handleLogin, isLoggedIn } from "../withAuth/services";
+import {
+  handleLogin,
+  isLoggedIn,
+  handleDeleteCard
+} from "../withAuth/services";
 import styled from "styled-components";
 import "./Card.css";
 
@@ -65,12 +69,17 @@ const Content = styled.p`
 `;
 
 export default class BusinessCard extends React.Component {
+  DeleteHandler = async () => {
+    console.log(this.props.id);
+    await handleDeleteCard(this.props.id);
+    this.props.cb();
+  };
   render() {
     return (
       <Card>
         <HeaderBack>
           <Header>{this.props.name}</Header>
-          <Button onClick={this.Login}>Delete</Button>
+          <Button onClick={this.DeleteHandler}>Delete</Button>
         </HeaderBack>
         <Content>Number: {this.props.number}</Content>
         <Body>

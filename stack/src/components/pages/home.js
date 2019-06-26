@@ -30,6 +30,19 @@ export default class HomePage extends React.Component {
   state = {
     cards: []
   };
+  UpdateCards = () => {
+    let user = getUser();
+    console.log(user);
+    axios
+      .get(`https://bw-business-card-org-be-raine.herokuapp.com/api/cards`, {
+        headers: { Authorization: `${user.token}` }
+      })
+      .then(res => {
+        this.setState({
+          cards: res.data
+        });
+      });
+  };
   componentDidMount = () => {
     let user = getUser();
     console.log(user);
@@ -53,6 +66,8 @@ export default class HomePage extends React.Component {
             address={card.address}
             number={card.phone}
             notes={card.notes}
+            id={card.id}
+            cb={this.UpdateCards}
           />
         );
       });
