@@ -7,6 +7,7 @@ import Login from "./components/LoginComponent/Login";
 import Register from "./components/LoginComponent/Register";
 import Nav from "./components/Nav/Nav";
 import Add from "./components/pages/Add";
+import Edit from "./components/pages/Edit";
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute exact path="/home" component={Home} />
       <PrivateRoute exact path="/add" component={Add} />
+      <PrivateRoute exact path="/edit" component={Edit} />
     </Router>
   );
 }

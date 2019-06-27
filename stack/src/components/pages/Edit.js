@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { handleAddCard } from "../withAuth/services";
+import { handleEditCard, handleGetCards } from "../withAuth/services";
 import styled from "styled-components";
 import PhoneInput from "react-phone-input-auto-format";
 
-const AddForm = styled.div`
+const EditForm = styled.div`
   margin: auto;
   margin-top: 100px;
   background-color: white;
@@ -40,6 +40,16 @@ const TextInput = styled.input`
     outline: none;
   }
 `;
+const Select = styled.select`
+  margin: 25px;
+  width: 50%;
+  height: 25px;
+  border: none;
+  border-bottom: 2px solid black;
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Button = styled.button`
   margin: 25px;
@@ -51,8 +61,10 @@ const Button = styled.button`
   color: white;
 `;
 
-export default class Add extends React.Component {
+export default class Edit extends React.Component {
   state = {
+    cards: null,
+    activeCard: "",
     add: false,
     businessName: "",
     address: "",
@@ -66,8 +78,9 @@ export default class Add extends React.Component {
     website: null,
     notes: null
   };
-  Login = () => {
+  Login = async () => {
     const {
+      activeCard,
       businessName,
       address,
       phone,
@@ -80,8 +93,11 @@ export default class Add extends React.Component {
       website,
       notes
     } = this.state;
+    let id = activeCard.id;
+    console.log(activeCard);
     if (businessName.length > 0 && address.length > 0 && phone.length > 0) {
-      let add = handleAddCard({
+      let add = await handleEditCard({
+        id,
         businessName,
         address,
         phone,
@@ -112,16 +128,65 @@ export default class Add extends React.Component {
       });
     }
   };
+  getCards = async () => {
+    let cards = await handleGetCards();
+    this.setState({
+      cards: cards
+    });
+  };
+  findCard = e => {
+    let { cards } = this.state;
+    if (cards) {
+      let id = e.target.value;
+
+      let Card = cards.filter(card => {
+        return card.id.toString() === id.toString();
+      });
+      let activeCard = Card[0];
+      if (activeCard) {
+        this.setState({
+          activeCard: activeCard,
+          businessName: activeCard.businessName,
+          address: activeCard.address,
+          phone: activeCard.phone,
+          logoPic: activeCard.logoPic,
+          additionalPic: activeCard.additionalPic,
+          phone2: activeCard.phone2,
+          blurb: activeCard.blurb,
+          hours: activeCard.hours,
+          email: activeCard.email,
+          website: activeCard.website,
+          notes: activeCard.notes
+        });
+      }
+    }
+  };
+  makeOptions = () => {
+    let { cards } = this.state;
+    if (cards) {
+      return cards.map(card => {
+        return <option value={card.id}>{card.businessName}</option>;
+      });
+    }
+  };
+  componentDidMount = () => {
+    this.getCards();
+  };
   render() {
     const { add } = this.state;
     if (add) {
       return <Redirect to="/home" />;
     }
+    console.log(this.state.phone);
     return (
-      <AddForm>
+      <EditForm>
         <HeaderBack>
-          <Header>Manually add cards</Header>
+          <Header>Edit your cards</Header>
         </HeaderBack>
+        <Select value={this.state.businessName} onChange={this.findCard}>
+          <option>None selected</option>
+          {this.makeOptions()}
+        </Select>
         <TextInput
           type="text"
           name="businessName"
@@ -151,7 +216,7 @@ export default class Add extends React.Component {
           onChange={this.textFormHandler}
         />
         <Button onClick={this.Login}>Add Card</Button>
-      </AddForm>
+      </EditForm>
     );
   }
 }

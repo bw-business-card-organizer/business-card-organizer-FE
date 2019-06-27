@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Card from "../BusCard/Card";
 import BannerImage from "./banner.png";
-import { getUser } from "../withAuth/services";
+import { handleGetCards } from "../withAuth/services";
 const axios = require("axios");
 const Home = styled.div`
   display: flex;
@@ -30,31 +30,15 @@ export default class HomePage extends React.Component {
   state = {
     cards: []
   };
-  UpdateCards = () => {
-    let user = getUser();
-    console.log(user);
-    axios
-      .get(`https://bw-business-card-org-be-raine.herokuapp.com/api/cards`, {
-        headers: { Authorization: `${user.token}` }
-      })
-      .then(res => {
-        this.setState({
-          cards: res.data
-        });
-      });
+  UpdateCards = async () => {
+    let cards = await handleGetCards();
+    console.log(cards);
+    this.setState({
+      cards: cards
+    });
   };
   componentDidMount = () => {
-    let user = getUser();
-    console.log(user);
-    axios
-      .get(`https://bw-business-card-org-be-raine.herokuapp.com/api/cards`, {
-        headers: { Authorization: `${user.token}` }
-      })
-      .then(res => {
-        this.setState({
-          cards: res.data
-        });
-      });
+    this.UpdateCards();
   };
   makeCards = () => {
     let { cards } = this.state;
