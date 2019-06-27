@@ -67,14 +67,33 @@ export default class Add extends React.Component {
     notes: null
   };
   Login = () => {
-    const { businessName, address, phone, notes } = this.state;
-    if (
-      businessName.length > 0 &&
-      address.length > 0 &&
-      phone.length > 0 &&
-      notes.length > 0
-    ) {
-      let add = handleAddCard({ businessName, address, phone, notes });
+    const {
+      businessName,
+      address,
+      phone,
+      logoPic,
+      additionalPic,
+      phone2,
+      blurb,
+      hours,
+      email,
+      website,
+      notes
+    } = this.state;
+    if (businessName.length > 0 && address.length > 0 && phone.length > 0) {
+      let add = handleAddCard({
+        businessName,
+        address,
+        phone,
+        logoPic,
+        additionalPic,
+        phone2,
+        blurb,
+        hours,
+        email,
+        website,
+        notes
+      });
       if (add) {
         this.setState({
           add: true
@@ -101,7 +120,7 @@ export default class Add extends React.Component {
     return (
       <AddForm>
         <HeaderBack>
-          <Header>Register</Header>
+          <Header>Manually add cards</Header>
         </HeaderBack>
         <TextInput
           type="text"
