@@ -123,6 +123,23 @@ export const handleGetCards = async () => {
     });
   return data;
 };
+export const handleGetCard = async id => {
+  let user = getUser();
+  console.log(id);
+  let data = await axios
+    .get(`https://bw-business-card-test.herokuapp.com/api/cards/${id}`, {
+      headers: { Authorization: `${user.token}` }
+    })
+    .then(res => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch(res => {
+      alert(res.message);
+      return res.message;
+    });
+  return data;
+};
 export const handleEditCard = async ({
   id,
   businessName,
