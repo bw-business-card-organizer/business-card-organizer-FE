@@ -64,19 +64,31 @@ const Button = styled.button`
 export default class Edit extends React.Component {
   state = {
     cards: null,
-    activeCard: "",
+    activeCard: {
+      businessName: "",
+      address: "",
+      phone: "",
+      logoPic: "",
+      additionalPic: "",
+      phone2: "",
+      blurb: "",
+      hours: "",
+      email: "",
+      website: "",
+      notes: ""
+    },
     add: false,
     businessName: "",
     address: "",
     phone: "",
-    logoPic: null,
-    additionalPic: null,
-    phone2: null,
-    blurb: null,
-    hours: null,
-    email: null,
-    website: null,
-    notes: null
+    logoPic: "",
+    additionalPic: "",
+    phone2: "",
+    blurb: "",
+    hours: "",
+    email: "",
+    website: "",
+    notes: ""
   };
   Login = async () => {
     const {
@@ -183,39 +195,41 @@ export default class Edit extends React.Component {
         <HeaderBack>
           <Header>Edit your cards</Header>
         </HeaderBack>
-        <Select value={this.state.businessName} onChange={this.findCard}>
-          <option>None selected</option>
-          {this.makeOptions()}
-        </Select>
-        <TextInput
-          type="text"
-          name="businessName"
-          placeholder="business Name"
-          value={this.state.businessName}
-          onChange={this.textFormHandler}
-        />
-        <TextInput
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={this.state.address}
-          onChange={this.textFormHandler}
-        />
-        <PhoneInput
-          name="phone"
-          placeholder="phone number"
-          value={this.state.phone}
-          onChange={this.textFormHandler}
-          inputComponent={TextInput}
-        />
-        <TextInput
-          type="text"
-          name="notes"
-          placeholder="notes"
-          value={this.state.notes}
-          onChange={this.textFormHandler}
-        />
-        <Button onClick={this.Login}>Add Card</Button>
+        <form>
+          <Select onChange={this.findCard}>
+            <option value="-1">None selected</option>
+            {this.makeOptions()}
+          </Select>
+          <TextInput
+            type="text"
+            name="businessName"
+            placeholder="business Name"
+            value={this.state.businessName}
+            onChange={this.textFormHandler}
+          />
+          <TextInput
+            type="text"
+            name="address"
+            placeholder="Address"
+            value={this.state.address}
+            onChange={this.textFormHandler}
+          />
+          <PhoneInput
+            name="phone"
+            placeholder="phone number"
+            value={this.state.phone}
+            onChange={this.textFormHandler}
+            inputComponent={TextInput}
+          />
+          <TextInput
+            type="text"
+            name="notes"
+            placeholder="notes"
+            value={this.state.notes}
+            onChange={this.textFormHandler}
+          />
+          <Button onClick={this.Login}>Add Card</Button>
+        </form>
       </EditForm>
     );
   }
