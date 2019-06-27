@@ -98,10 +98,9 @@ class Nav extends React.Component {
           <FlexinNav onClick={() => this.changePage("/edit")}>
             <UI src={EditImage} />
           </FlexinNav>
-          <FlexinNav onClick={() => this.changePage("/home")}>
+          <FlexinNav onClick={() => this.changePage("/profile")}>
             <UI src={HomeImage} />
           </FlexinNav>
-
           {this.makeLog()}
           <FlexinNav onClick={this.DarkMode}>
             <UI src={this.state.dark} />
