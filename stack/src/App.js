@@ -9,6 +9,7 @@ import Nav from "./components/Nav/Nav";
 import BottomNav from "./components/Nav/BottomNav";
 import Add from "./components/pages/Add";
 import Edit from "./components/pages/Edit";
+import Card from "./components/pages/Card";
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
       <PrivateRoute exact path="/home" component={Home} />
       <PrivateRoute exact path="/add" component={Add} />
       <PrivateRoute exact path="/edit" component={Edit} />
+      <PrivateRoute path="/card/:id" component={Card} />
       <BottomNav />
     </Router>
   );
