@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "./Nav.css";
 import DarkImage from "./dark.png";
 import LightImage from "./light.png";
+import QRImage from "./qr.png";
 import { logout, isLoggedIn } from "../withAuth/services";
 
 import { withRouter } from "react-router-dom";
@@ -46,6 +47,12 @@ const Dark = styled.img`
   cursor: pointer;
   position: absolute;
   width: 25px;
+  align-self: center;
+`;
+const QR = styled.img`
+  cursor: pointer;
+  position: absolute;
+  width: 50px;
   align-self: center;
 `;
 class Nav extends React.Component {
@@ -94,7 +101,8 @@ class Nav extends React.Component {
     if (window.innerWidth < 800) {
       return (
         <NavDiv>
-          <Header>STACK</Header>
+          <Header onClick={() => this.changePage("/home")}>STACK</Header>
+          <QR onClick={() => this.changePage("/profile")} src={QRImage} />
         </NavDiv>
       );
     } else {
@@ -104,6 +112,10 @@ class Nav extends React.Component {
 
           <FlexinNav>
             <HeaderNav onClick={() => this.changePage("/add")}>ADD</HeaderNav>
+            <HeaderNav onClick={() => this.changePage("/profile")}>
+              QR
+            </HeaderNav>
+
             <HeaderNav onClick={() => this.changePage("/edit")}>EDIT</HeaderNav>
             {this.makeLog()}
           </FlexinNav>

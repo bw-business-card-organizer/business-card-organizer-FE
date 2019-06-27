@@ -123,6 +123,42 @@ export const handleGetCards = async () => {
     });
   return data;
 };
+export const handleGetQR = async id => {
+  let user = getUser();
+  console.log(user);
+  let data = await axios
+    .get(`https://bw-business-card-test.herokuapp.com/api/users`, {
+      headers: { Authorization: `${user.token}` }
+    })
+    .then(res => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch(res => {
+      alert(res.message);
+      return res.message;
+    });
+  for (let i = 0; i < data.length; i++) {
+    try {
+      if (id === data[i].id) {
+        console.log(data[i]);
+        data = await axios
+          .get(`https://bw-business-card-test.herokuapp.com/api/cards/${4}`, {
+            headers: { Authorization: `${user.token}` }
+          })
+          .then(res => {
+            console.log(res.data);
+            return res.data;
+          })
+          .catch(res => {
+            alert(res.message);
+            return res.message;
+          });
+      }
+    } catch (e) {}
+  }
+  return data;
+};
 export const handleGetCard = async id => {
   let user = getUser();
   console.log(id);
