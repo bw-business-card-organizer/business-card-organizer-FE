@@ -66,7 +66,7 @@ export default class Add extends React.Component {
     website: null,
     notes: null
   };
-  Login = () => {
+  Login = async () => {
     const {
       businessName,
       address,
@@ -81,7 +81,7 @@ export default class Add extends React.Component {
       notes
     } = this.state;
     if (businessName.length > 0 && address.length > 0 && phone.length > 0) {
-      let add = handleAddCard({
+      let add = await handleAddCard({
         businessName,
         address,
         phone,
