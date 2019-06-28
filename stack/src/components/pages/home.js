@@ -9,6 +9,7 @@ const Home = styled.div`
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 `;
 const Cards = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import { handleEditCard, handleGetCards } from "../withAuth/services";
 import styled from "styled-components";
 import PhoneInput from "react-phone-input-auto-format";
@@ -61,7 +61,7 @@ const Button = styled.button`
   color: white;
 `;
 
-export default class Edit extends React.Component {
+class Edit extends React.Component {
   state = {
     cards: null,
     activeCard: {
@@ -106,7 +106,6 @@ export default class Edit extends React.Component {
       notes
     } = this.state;
     let id = activeCard.id;
-    console.log(activeCard);
     if (businessName.length > 0 && address.length > 0 && phone.length > 0) {
       let add = await handleEditCard({
         id,
@@ -122,10 +121,9 @@ export default class Edit extends React.Component {
         website,
         notes
       });
-      if (add) {
-        this.setState({
-          add: true
-        });
+      console.log(add);
+      if (add === true) {
+        this.props.history.push("/home");
       }
     }
   };
@@ -185,52 +183,48 @@ export default class Edit extends React.Component {
     this.getCards();
   };
   render() {
-    const { add } = this.state;
-    if (add) {
-      return <Redirect to="/home" />;
-    }
-    console.log(this.state.phone);
     return (
       <EditForm>
         <HeaderBack>
           <Header>Edit your cards</Header>
         </HeaderBack>
-        <form>
-          <Select onChange={this.findCard}>
-            <option value="-1">None selected</option>
-            {this.makeOptions()}
-          </Select>
-          <TextInput
-            type="text"
-            name="businessName"
-            placeholder="business Name"
-            value={this.state.businessName}
-            onChange={this.textFormHandler}
-          />
-          <TextInput
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={this.state.address}
-            onChange={this.textFormHandler}
-          />
-          <PhoneInput
-            name="phone"
-            placeholder="phone number"
-            value={this.state.phone}
-            onChange={this.textFormHandler}
-            inputComponent={TextInput}
-          />
-          <TextInput
-            type="text"
-            name="notes"
-            placeholder="notes"
-            value={this.state.notes}
-            onChange={this.textFormHandler}
-          />
-          <Button onClick={this.Login}>Add Card</Button>
-        </form>
+
+        <Select onChange={this.findCard}>
+          <option value="-1">None selected</option>
+          {this.makeOptions()}
+        </Select>
+        <TextInput
+          type="text"
+          name="businessName"
+          placeholder="business Name"
+          value={this.state.businessName}
+          onChange={this.textFormHandler}
+        />
+        <TextInput
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={this.state.address}
+          onChange={this.textFormHandler}
+        />
+        <PhoneInput
+          name="phone"
+          placeholder="phone number"
+          value={this.state.phone}
+          onChange={this.textFormHandler}
+          inputComponent={TextInput}
+        />
+        <TextInput
+          type="text"
+          name="notes"
+          placeholder="notes"
+          value={this.state.notes}
+          onChange={this.textFormHandler}
+        />
+        <Button onClick={this.Login}>Edit Card</Button>
       </EditForm>
     );
   }
 }
+
+export default withRouter(Edit);
