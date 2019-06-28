@@ -143,7 +143,7 @@ export const handleGetQR = async id => {
       if (id === data[i].id) {
         console.log(data[i]);
         data = await axios
-          .get(`https://bw-business-card-test.herokuapp.com/api/cards/${4}`, {
+          .get(`https://bw-business-card-test.herokuapp.com/api/cards/${id}`, {
             headers: { Authorization: `${user.token}` }
           })
           .then(res => {
