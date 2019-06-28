@@ -28,7 +28,7 @@ export default class HomePage extends React.Component {
     cards: []
   };
   getQRCode = async () => {
-    let qr = await handleGetQR(1);
+    let qr = await handleGetQR(5);
     console.log(qr);
     this.setState({
       qr: qr.qrcode
