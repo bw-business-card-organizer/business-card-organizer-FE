@@ -11,6 +11,7 @@ import ShutdownImage from "./shutdown.png";
 import { withRouter } from "react-router-dom";
 const NavDiv = styled.div`
   position: fixed;
+  margin-top 10px;
   bottom: 0px;
   width: -webkit-fill-available;
   height: 60px;
@@ -28,15 +29,12 @@ const FlexinNav = styled.div`
   justify-content: center;
   align-items: center;
   border-left: 0.5px black solid;
-
   border-right: 0.5px black solid;
 `;
 const UI = styled.img`
   width: 40px;
   height: 40px;
   user-select: none;
-  :&focus {
-  }
 `;
 class Nav extends React.Component {
   state = {
@@ -98,7 +96,7 @@ class Nav extends React.Component {
           <FlexinNav onClick={() => this.changePage("/edit")}>
             <UI src={EditImage} />
           </FlexinNav>
-          <FlexinNav onClick={() => this.changePage("/profile")}>
+          <FlexinNav onClick={() => this.changePage("/home")}>
             <UI src={HomeImage} />
           </FlexinNav>
           {this.makeLog()}

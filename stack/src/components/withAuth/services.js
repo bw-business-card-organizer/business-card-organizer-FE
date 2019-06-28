@@ -214,11 +214,11 @@ export const handleEditCard = async ({
       }
     )
     .then(res => {
-      return res.data;
+      return true;
     })
     .catch(res => {
       alert(res.message);
-      return res.message;
+      return false;
     });
   return data;
 };
