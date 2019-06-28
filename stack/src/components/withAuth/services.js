@@ -20,7 +20,7 @@ export const handleLogin = async ({ email, password }) => {
       return true;
     })
     .catch(res => {
-      console.log(res);
+      //console.log(res);
       alert(res.message);
       return false;
     });
@@ -57,7 +57,7 @@ export const handleAddCard = async ({
   website,
   notes
 }) => {
-  console.log(businessName, address, phone, notes);
+  //console.log(businessName, address, phone, notes);
   let user = getUser();
   let data = await axios
     .post(
@@ -91,8 +91,8 @@ export const handleAddCard = async ({
 };
 export const handleDeleteCard = async id => {
   let user = getUser();
-  console.log(user.token);
-  console.log(id);
+  //console.log(user.token);
+  //console.log(id);
   let data = await axios
     .delete(`https://bw-business-card-test.herokuapp.com/api/cards/${id}`, {
       headers: { Authorization: `${user.token}` }
@@ -108,13 +108,13 @@ export const handleDeleteCard = async id => {
 };
 export const handleGetCards = async () => {
   let user = getUser();
-  console.log(user);
+  //console.log(user);
   let data = await axios
     .get(`https://bw-business-card-test.herokuapp.com/api/cards`, {
       headers: { Authorization: `${user.token}` }
     })
     .then(res => {
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     })
     .catch(res => {
@@ -125,13 +125,13 @@ export const handleGetCards = async () => {
 };
 export const handleGetQR = async id => {
   let user = getUser();
-  console.log(user);
+  //console.log(user);
   let data = await axios
     .get(`https://bw-business-card-test.herokuapp.com/api/users`, {
       headers: { Authorization: `${user.token}` }
     })
     .then(res => {
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     })
     .catch(res => {
@@ -141,13 +141,13 @@ export const handleGetQR = async id => {
   for (let i = 0; i < data.length; i++) {
     try {
       if (id === data[i].id) {
-        console.log(data[i]);
+        ////console.log(data[i]);
         data = await axios
           .get(`https://bw-business-card-test.herokuapp.com/api/cards/${id}`, {
             headers: { Authorization: `${user.token}` }
           })
           .then(res => {
-            console.log(res.data);
+            ////console.log(res.data);
             return res.data;
           })
           .catch(res => {
@@ -161,13 +161,13 @@ export const handleGetQR = async id => {
 };
 export const handleGetCard = async id => {
   let user = getUser();
-  console.log(id);
+  //console.log(id);
   let data = await axios
     .get(`https://bw-business-card-test.herokuapp.com/api/cards/${id}`, {
       headers: { Authorization: `${user.token}` }
     })
     .then(res => {
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     })
     .catch(res => {
@@ -191,7 +191,7 @@ export const handleEditCard = async ({
   notes
 }) => {
   let user = getUser();
-  console.log(id);
+  //console.log(id);
 
   let data = axios
     .put(
